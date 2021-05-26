@@ -79,8 +79,8 @@ $$
 有了这两个特殊的"词"，我们的概率公式就更加简单：
 
 $$
-P(W) = P(w_1 | <s>) \times P(w_2 |w_1) \times \ldots 
-\times P(w_n | w_{n-1}) \times P(</s> | w_n)
+P(W) = P(w_1 | \<s>) \times P(w_2 |w_1) \times \ldots
+\times P(w_n | w_{n-1}) \times P(\</s> | w_n)
 $$
 
 ### N-gram的概率估计
