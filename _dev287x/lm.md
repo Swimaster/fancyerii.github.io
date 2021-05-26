@@ -141,7 +141,7 @@ $$
 因此我们在分配概率的时候要考虑其history(context)，如果"white dog"后面出现the的概率大，那么它分配的概率就大。但是训练数据中并没有"white dog the"，那怎么办呢？这里可以使用reduced context，我们把history "white dog"变成"dog"，也就是我们根据$\hat{P}(the \vert dog)$和$\hat{P}(eat \vert dog)$的来分配这1/3的概率。如果"dog the"还没有出现呢？我们的$\hat{P}(⋅\vert dog)$也会打折，这样$\hat{P}(the \vert dog)$还可以从这里打折的概率里用1-gram $\hat{P}(the)$再次分配一个(很小)的概率。这个过程是递归的：如果3-gram没有出现，那么用2-gram从打折的概率那里分配(较小的)概率，如果2-gram还没有，那么就从2-gram的打折里用1-gram去分配(更小的)概率。这种方法就叫回退(backoff)。
 
 $$
-{\hat{P}}_{\text{bo}}\left( w_{k} \right|w_{1}\ldots w_{k - 1}) = \ \left\{ \begin{matrix} \hat{P}\left( w_{k} \right|w_{1}\ldots w_{k - 1}),\ \ \ c(w_{1}\ldots w_{k}) > 0 \\ {\hat{P}}_{\text{bo}}\left( w_{k} \right|w_{2}\ldots w_{k - 1})\ \alpha(w_{2}\ldots w_{k - 1}),\ \  c\left( w_{1}\ldots w_{k} \right) = 0 \\ \end{matrix} \right.\
+\begin{matrix}{\hat{P}}_{\text{bo}}\left( w_{k} \right|w_{1}\ldots w_{k - 1}) = \ \left\{ \begin{matrix} \hat{P}\left( w_{k} \right|w_{1}\ldots w_{k - 1}),\ \ \ c(w_{1}\ldots w_{k}) > 0 \\ {\hat{P}}_{\text{bo}}\left( w_{k} \right|w_{2}\ldots w_{k - 1})\ \alpha(w_{2}\ldots w_{k - 1}),\ \  c\left( w_{1}\ldots w_{k} \right) = 0 \\ \end{matrix} \right.\
 $$
 
 
